@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="poster_width">54dp</dimen>
+    <dimen name="poster_height">81dp</dimen>
+    <dimen name="film_title">18sp</dimen>
+    <dimen name="favorite_button">24dp</dimen>
+</resources>

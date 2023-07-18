@@ -1,8 +1,9 @@
-package com.example.films
+package com.example.films.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.example.films.R
 import com.example.films.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

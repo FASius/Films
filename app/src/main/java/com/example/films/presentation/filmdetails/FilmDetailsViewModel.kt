@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.films.data.FilmsRepository
-import com.example.films.data.entities.FilmDetails
+import com.example.films.data.films.FilmsRepository
+import com.example.films.data.films.entities.FilmDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

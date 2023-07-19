@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.films.R
-import com.example.films.data.Filter
+import com.example.films.data.films.Filter
 import com.example.films.databinding.FragmentFavoritesFilmsBinding
 import com.example.films.presentation.filmdetails.ARG_FILM_ID
 import com.example.films.presentation.filmslist.FilmsAdapter

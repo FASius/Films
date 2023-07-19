@@ -8,7 +8,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.example.films.data.entities.Film
+import com.example.films.data.films.entities.Film
 import com.example.films.databinding.FilmItemBinding
 
 class FilmsAdapter(

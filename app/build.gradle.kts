@@ -82,6 +82,7 @@ dependencies {
 
     // retrofit
     implementation(libs.retrofit2.retrofit)
+    implementation(libs.retrofit2.gson.converter)
 
     //hilt
     kapt(libs.hilt.compiler)

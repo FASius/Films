@@ -1,8 +1,8 @@
-package com.example.films.data
+package com.example.films.data.films
 
 import androidx.paging.PagingData
-import com.example.films.data.entities.Film
-import com.example.films.data.entities.FilmDetails
+import com.example.films.data.films.entities.Film
+import com.example.films.data.films.entities.FilmDetails
 import kotlinx.coroutines.flow.Flow
 
 interface FilmsRepository {

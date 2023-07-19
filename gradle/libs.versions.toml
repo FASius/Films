@@ -31,6 +31,7 @@ room-compiler = { group = "androidx.room", name = "room-compiler", version.ref =
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 
 retrofit2-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "squareup-retrofit" }
+retrofit2-gson-converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "squareup-retrofit" }
 
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 

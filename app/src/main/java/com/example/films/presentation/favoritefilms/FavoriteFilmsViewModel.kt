@@ -7,9 +7,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.films.core.ui.combineWith
-import com.example.films.data.FilmsRepository
-import com.example.films.data.Filter
-import com.example.films.data.entities.Film
+import com.example.films.data.films.FilmsRepository
+import com.example.films.data.films.Filter
+import com.example.films.data.films.entities.Film
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.debounce

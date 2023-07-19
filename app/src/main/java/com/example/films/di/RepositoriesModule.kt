@@ -1,7 +1,7 @@
 package com.example.films.di
 
-import com.example.films.data.FilmsRepository
-import com.example.films.data.FilmsRepositoryImpl
+import com.example.films.data.films.FilmsRepository
+import com.example.films.data.films.FilmsRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

@@ -1,9 +1,9 @@
 package com.example.films.presentation.filmslist
 
 import androidx.paging.PagingData
-import com.example.films.data.FilmsRepository
-import com.example.films.data.Filter
-import com.example.films.data.entities.Film
+import com.example.films.data.films.FilmsRepository
+import com.example.films.data.films.Filter
+import com.example.films.data.films.entities.Film
 import com.example.films.presentation.favoritefilms.FavoriteFilmsViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow

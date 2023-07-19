@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
 import com.example.films.R
-import com.example.films.data.entities.FilmDetails
+import com.example.films.data.films.entities.FilmDetails
 import com.example.films.databinding.FragmentFilmDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -1,4 +1,4 @@
-package com.example.films.data.entities
+package com.example.films.data.films.entities
 
 data class Actor(
     val realName: String?,

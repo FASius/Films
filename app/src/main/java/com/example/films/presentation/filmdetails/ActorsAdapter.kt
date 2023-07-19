@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.films.data.entities.Actor
+import com.example.films.data.films.entities.Actor
 import com.example.films.databinding.ActorItemBinding
 
 class ActorsAdapter : ListAdapter<Actor, ActorsAdapter.ActorsViewHolder>(ActorsDiffCallback()) {

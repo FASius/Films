@@ -2,4 +2,11 @@
     <string name="app_name">Films</string>
     <string name="favorite">Favorite</string>
     <string name="film_poster">Film Poster</string>
+    <string name="filter_dialog_title">Filter by</string>
+    <string name="filter_dialog_apply">Apply</string>
+    <string name="try_again">Try again</string>
+    <string name="favorite_films">Favorite films</string>
+    <string name="filter_rating">Rating</string>
+    <string name="filter_votes">Votes</string>
+    <string name="filter_date">Release date</string>
 </resources>

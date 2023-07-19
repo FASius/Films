@@ -7,18 +7,20 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.example.films.presentation.SplashFragment"
+        android:name="com.example.films.presentation.splash.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_filmsListFragment"
-            app:destination="@id/filmsListFragment" />
+            app:destination="@id/filmsListFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/filmsListFragment"
-        android:name="com.example.films.presentation.FilmsListFragment"
+        android:name="com.example.films.presentation.filmslist.FilmsListFragment"
         android:label="fragment_films_list"
-        tools:layout="@layout/fragment_films_list" >
+        tools:layout="@layout/fragment_favorites_films" >
         <action
             android:id="@+id/action_filmsListFragment_to_favoritesFilmsFragment"
             app:destination="@id/favoritesFilmsFragment" />
@@ -28,11 +30,15 @@
     </fragment>
     <fragment
         android:id="@+id/favoritesFilmsFragment"
-        android:name="com.example.films.presentation.FavoritesFilmsFragment"
+        android:name="com.example.films.presentation.favoritefilms.FavoritesFilmsFragment"
         android:label="fragment_film_details"
-        tools:layout="@layout/fragment_film_details" />
+        tools:layout="@layout/fragment_film_details" >
+        <action
+            android:id="@+id/action_favoritesFilmsFragment_to_filmDetailsFragment"
+            app:destination="@id/filmDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/filmDetailsFragment"
-        android:name="com.example.films.presentation.FilmDetailsFragment"
+        android:name="com.example.films.presentation.filmdetails.FilmDetailsFragment"
         android:label="FilmDetailsFragment" />
 </navigation>

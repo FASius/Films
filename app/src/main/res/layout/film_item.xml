@@ -24,7 +24,7 @@
         android:layout_marginStart="8dp"
         app:layout_constraintStart_toEndOf="@+id/film_poster"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Green mile" />
+        tools:text="The Green Mile" />
 
     <TextView
         android:id="@+id/film_rating"
@@ -38,15 +38,16 @@
         app:layout_constraintTop_toBottomOf="@+id/film_name"
         tools:text="9.2" />
 
-    <ImageButton
+    <CheckBox
         android:id="@+id/add_to_favorite"
         android:layout_width="@dimen/favorite_button"
         android:layout_height="@dimen/favorite_button"
         android:layout_margin="16dp"
-        android:backgroundTint="@android:color/transparent"
         android:contentDescription="@string/favorite"
+        android:backgroundTint="@android:color/transparent"
         android:scaleType="center"
-        android:src="@drawable/ic_favorite"
+        android:button="@drawable/ic_favorite"
+        android:buttonTint="@color/green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

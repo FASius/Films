@@ -2,11 +2,21 @@
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-parcelize")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
     kotlin("kapt")
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.dagger.hilt)
+}
+
+fun getApiKey(): String {
+    val items = HashMap<String, String>()
+    val localPropertiesFile = rootProject.file("local.properties")
+
+    localPropertiesFile.forEachLine {
+        items[it.substringBefore('=')] = it.substringAfter('=')
+    }
+
+    return items["api.key"] ?: throw NoSuchElementException()
 }
 
 android {
@@ -21,6 +31,8 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        resValue("string", "api_key", getApiKey())
     }
 
     buildTypes {
@@ -64,6 +76,9 @@ dependencies {
     implementation(libs.room.runtime)
     kapt(libs.room.compiler)
     implementation(libs.room.ktx)
+
+    // paging library
+    implementation(libs.paging.library)
 
     // retrofit
     implementation(libs.retrofit2.retrofit)

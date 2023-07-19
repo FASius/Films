@@ -16,6 +16,7 @@ viewbinding-delegate = "1.5.9"
 hilt = "2.47"
 nav-component = "2.6.0"
 squareup-retrofit = "2.9.0"
+paging-library = "3.1.1"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -47,6 +48,10 @@ gson = { group = "com.google.code.gson", name = "gson", version.ref = "gson" }
 
 viewbinding-delegate = { group = "com.github.kirich1409", name = "viewbindingpropertydelegate-noreflection", version.ref = "viewbinding-delegate" }
 
+paging-library = { group = "androidx.paging", name = "paging-runtime", version.ref = "paging-library" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }

@@ -1,8 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.FavoritesFilmsFragment">
+    tools:context=".presentation.favoritefilms.FavoritesFilmsFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <TextView
+                android:id="@+id/film_rating"
+                style="@style/Theme.Films.FilmRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_marginStart="12dp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="2dp"
+                app:layout_constraintStart_toEndOf="@+id/film_poster"
+                app:layout_constraintTop_toBottomOf="@+id/film_title"
+                tools:text="9.2" />
+
+            <TextView
+                android:id="@+id/film_metadata"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:gravity="center"
+                android:singleLine="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/film_poster"
+                app:layout_constraintTop_toBottomOf="@+id/film_rating"
+                tools:text="1999, Crime, Drama, Fantasy\nUSA, 189 minutes, 16+" />
+
+            <ImageView
+                android:id="@+id/film_poster"
+                android:layout_width="@dimen/poster_detail_width"
+                android:layout_height="@dimen/poster_detail_height"
+                android:layout_margin="8dp"
+                android:contentDescription="@string/film_poster"
+                android:src="@drawable/film_logo_example"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/film_title"
+                style="@style/Theme.Films.FilmTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:textSize="26sp"
+                app:layout_constraintStart_toEndOf="@+id/film_poster"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="The Green Mile" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/actors_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/film_poster"
+                tools:itemCount="2"
+                tools:listitem="@layout/actor_item" />
+
+            <TextView
+                android:id="@+id/film_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/actors_list"
+                tools:text="Пол Эджкомб — начальник блока смертников в тюрьме «Холодная гора», каждый из узников которого однажды проходит «зеленую милю» по пути к месту казни. Пол повидал много заключённых и надзирателей за время работы. Однако гигант Джон Коффи, обвинённый в страшном преступлении, стал одним из самых необычных обитателей блока." />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/error_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/error_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            tools:text="Network Error! Please try again later" />
+
+        <Button
+            android:id="@+id/try_again"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/try_again" />
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        tools:visibility="gone" />
+</FrameLayout>

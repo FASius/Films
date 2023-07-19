@@ -2,6 +2,8 @@
 <resources>
     <dimen name="poster_width">54dp</dimen>
     <dimen name="poster_height">81dp</dimen>
+    <dimen name="poster_detail_width">120dp</dimen>
+    <dimen name="poster_detail_height">180dp</dimen>
     <dimen name="film_title">18sp</dimen>
     <dimen name="favorite_button">24dp</dimen>
 </resources>

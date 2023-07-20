@@ -9,6 +9,7 @@ import com.example.films.data.films.Filter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,10 +23,12 @@ class SplashViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             val startLoadingTime = System.currentTimeMillis()
-            filmsRepository.loadFilms(Filter.RATING)
+            runBlocking {
+                filmsRepository.loadFilms(Filter.RATING)
+            }
             val endLoadingTime = System.currentTimeMillis()
             val loadingTime = endLoadingTime - startLoadingTime
-            if (endLoadingTime - startLoadingTime < MIN_SCREEN_LOAD_TIME_MS) {
+            if (loadingTime < MIN_SCREEN_LOAD_TIME_MS) {
                 delay(MIN_SCREEN_LOAD_TIME_MS - loadingTime)
             }
             _isLoading.value = false

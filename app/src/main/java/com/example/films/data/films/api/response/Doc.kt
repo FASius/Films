@@ -9,12 +9,11 @@ data class Doc(
     val rating: Rating?,
     val year: Int?
 ) {
-    fun toFilm(isFavorite: Boolean) = Film(
-        isFavorite = isFavorite,
+    fun toFilm() = Film(
         id = id,
         name = name,
         posterUrl = poster?.previewUrl,
-        rating = rating?.kp.toString(),
+        rating = rating?.kp,
         year = year
     )
 }

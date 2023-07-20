@@ -1,6 +1,7 @@
 package com.example.films.di
 
 import android.content.Context
+import com.example.films.Constants
 import com.example.films.R
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -27,7 +28,7 @@ object NetworkModule {
     fun provideRetrofit(client: OkHttpClient, converterFactory: Converter.Factory): Retrofit {
         return Retrofit.Builder()
             .client(client)
-            .baseUrl("https://api.kinopoisk.dev/")
+            .baseUrl(Constants.BASE_URL)
             .addConverterFactory(converterFactory)
             .build()
     }
@@ -36,7 +37,7 @@ object NetworkModule {
     @Singleton
     fun provideGson(): Gson {
         return GsonBuilder()
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            .setDateFormat(Constants.DATA_FORMAT)
             .create()
     }
 

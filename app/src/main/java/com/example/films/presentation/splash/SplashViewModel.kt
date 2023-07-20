@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.films.data.films.FilmsRepository
+import com.example.films.data.films.Filter
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -15,13 +16,13 @@ class SplashViewModel @Inject constructor(
     private val filmsRepository: FilmsRepository
 ) : ViewModel() {
 
-    private val _isLoading = MutableLiveData(true);
+    private val _isLoading = MutableLiveData(true)
     val isLoading: LiveData<Boolean> = _isLoading
 
     init {
         viewModelScope.launch {
             val startLoadingTime = System.currentTimeMillis()
-            filmsRepository.loadFilms()
+            filmsRepository.loadFilms(Filter.RATING)
             val endLoadingTime = System.currentTimeMillis()
             val loadingTime = endLoadingTime - startLoadingTime
             if (endLoadingTime - startLoadingTime < MIN_SCREEN_LOAD_TIME_MS) {

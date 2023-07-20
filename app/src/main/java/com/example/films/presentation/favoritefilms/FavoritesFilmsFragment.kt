@@ -10,44 +10,60 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.films.R
 import com.example.films.data.films.Filter
+import com.example.films.databinding.FilmsListBinding
 import com.example.films.databinding.FragmentFavoritesFilmsBinding
 import com.example.films.presentation.filmdetails.ARG_FILM_ID
 import com.example.films.presentation.filmslist.FilmsAdapter
-import com.example.films.presentation.filmslist.FilmsListViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 open class FavoritesFilmsFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRes) {
     constructor() : this(R.layout.fragment_favorites_films)
 
-    protected open val binding by viewBinding(FragmentFavoritesFilmsBinding::bind)
-    protected open val viewModel by viewModels<FilmsListViewModel>()
+    private val favoritesBinding by viewBinding(FragmentFavoritesFilmsBinding::bind)
+    protected open val binding: FilmsListBinding
+        get() = favoritesBinding.filmsLayout
+    protected open val viewModel by viewModels<FavoriteFilmsViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val adapter = createAdapter()
         val layoutManager = LinearLayoutManager(requireContext())
-        setupListeners(onQueryChangeListener, adapter, layoutManager, ::showDialog)
+        val adapterWithFooter = adapter.withLoadStateFooter(DefaultLoadStateAdapter())
+        viewLifecycleOwner.lifecycleScope.launch {
+            adapter.loadStateFlow.debounce(200).collectLatest {
+                if (it.refresh is LoadState.Loading) {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.filmList.visibility = View.INVISIBLE
+                }
+                if (it.refresh is LoadState.NotLoading) {
+                    binding.progressBar.visibility = View.GONE
+                    binding.filmList.visibility = View.VISIBLE
+                }
+            }
+        }
+        setupUi(onQueryChangeListener, adapterWithFooter, layoutManager, ::showDialog)
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.films.collect {
                 adapter.submitData(it)
-                println(adapter)
-                println(it)
             }
         }
     }
 
-    protected open fun setupListeners(
+    private fun setupUi(
         onQueryTextListener: SearchView.OnQueryTextListener,
-        adapter: FilmsAdapter,
+        adapter: RecyclerView.Adapter<*>,
         layoutManager: RecyclerView.LayoutManager,
         filterClickListener: View.OnClickListener
     ) {
@@ -55,6 +71,13 @@ open class FavoritesFilmsFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRe
         binding.filmList.adapter = adapter
         binding.filmList.layoutManager = layoutManager
         binding.filter.setOnClickListener(filterClickListener)
+        setupUi()
+    }
+
+    protected open fun setupUi() {
+        favoritesBinding.clear.setOnClickListener {
+            viewModel.clearAll()
+        }
     }
 
     private var currentIndex = 0
@@ -80,8 +103,8 @@ open class FavoritesFilmsFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRe
             viewModel.removeFromFavorites(film)
     }, ::onDetailsClick)
 
-    protected open fun onDetailsClick(filmsId: Long) {
-        val args = bundleOf(ARG_FILM_ID to filmsId)
+    protected open fun onDetailsClick(filmItem: FilmListItem) {
+        val args = bundleOf(ARG_FILM_ID to filmItem.id)
         findNavController().navigate(
             R.id.action_favoritesFilmsFragment_to_filmDetailsFragment,
             args
@@ -110,6 +133,7 @@ open class FavoritesFilmsFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRe
             getString(R.string.filter_rating) -> Filter.RATING
             getString(R.string.filter_votes) -> Filter.VOTES
             getString(R.string.filter_date) -> Filter.RELEASE_DATE
+            getString(R.string.filter_name) -> Filter.ALPHABET
             else -> throw IllegalStateException()
         }
     }
@@ -121,6 +145,7 @@ open class FavoritesFilmsFragment(@LayoutRes layoutRes: Int) : Fragment(layoutRe
                     Filter.RATING -> R.string.filter_rating
                     Filter.VOTES -> R.string.filter_votes
                     Filter.RELEASE_DATE -> R.string.filter_date
+                    Filter.ALPHABET -> R.string.filter_name
                 }
             }
     }

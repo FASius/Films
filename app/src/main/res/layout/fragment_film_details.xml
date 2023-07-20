@@ -56,10 +56,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
+                android:maxLines="3"
                 android:textSize="26sp"
                 app:layout_constraintStart_toEndOf="@+id/film_poster"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="The Green Mile" />
+
+            <Button
+                android:id="@+id/trailer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_trailer"
+                app:layout_constraintBottom_toTopOf="@+id/actors_list"
+                app:layout_constraintEnd_toStartOf="@+id/add_to_favorite"
+                app:layout_constraintStart_toEndOf="@+id/film_poster"
+                app:layout_constraintTop_toBottomOf="@+id/film_metadata" />
+
+            <CheckBox
+                android:id="@+id/add_to_favorite"
+                android:layout_width="@dimen/favorite_button"
+                android:layout_height="@dimen/favorite_button"
+                android:layout_margin="16dp"
+                android:backgroundTint="@android:color/transparent"
+                android:button="@drawable/ic_favorite"
+                android:buttonTint="@color/green"
+                android:contentDescription="@string/favorite"
+                android:scaleType="center"
+                app:layout_constraintBottom_toTopOf="@+id/actors_list"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/film_metadata" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/actors_list"

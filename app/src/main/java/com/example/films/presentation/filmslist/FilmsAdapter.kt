@@ -8,13 +8,13 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
-import com.example.films.data.films.entities.Film
 import com.example.films.databinding.FilmItemBinding
+import com.example.films.presentation.favoritefilms.FilmListItem
 
 class FilmsAdapter(
-    private val onFavoriteClick: (Film, Boolean) -> Unit,
-    private val onItemClick: (Long) -> Unit
-) : PagingDataAdapter<Film, FilmsAdapter.FilmsViewHolder>(FilmsDiffCallback()) {
+    private val onFavoriteClick: (FilmListItem, Boolean) -> Unit,
+    private val onItemClick: (FilmListItem) -> Unit
+) : PagingDataAdapter<FilmListItem, FilmsAdapter.FilmsViewHolder>(FilmsDiffCallback()) {
 
     override fun onBindViewHolder(holder: FilmsViewHolder, position: Int) {
         holder.bind(getItem(position))
@@ -28,27 +28,27 @@ class FilmsAdapter(
 
     class FilmsViewHolder(
         private val binding: FilmItemBinding,
-        private val onFavoriteClick: (Film, Boolean) -> Unit,
-        private val onItemClick: (Long) -> Unit
+        private val onFavoriteClick: (FilmListItem, Boolean) -> Unit,
+        private val onItemClick: (FilmListItem) -> Unit
     ) : ViewHolder(binding.root) {
-        fun bind(film: Film?) {
+        fun bind(film: FilmListItem?) {
             if (film == null)
                 return
             with(binding) {
-                root.tag = film.id
+                root.tag = film
                 root.setOnClickListener {
-                    onItemClick(it.tag as Long)
+                    onItemClick(it.tag as FilmListItem)
                 }
                 root.children.forEach {
                     it.tag = film
                 }
                 addToFavorite.isChecked = film.isFavorite
                 filmName.text = film.name
-                filmRating.text = film.rating
+                filmRating.text = String.format("%.1f", film.rating)
                 addToFavorite.tag = film
                 addToFavorite.setOnClickListener {
                     val checked = (it as CheckBox).isChecked
-                    onFavoriteClick(it.tag as Film, checked)
+                    onFavoriteClick(it.tag as FilmListItem, checked)
                 }
                 Glide.with(filmPoster)
                     .load(film.posterUrl)
@@ -58,12 +58,12 @@ class FilmsAdapter(
     }
 }
 
-class FilmsDiffCallback: DiffUtil.ItemCallback<Film>() {
-    override fun areItemsTheSame(oldItem: Film, newItem: Film): Boolean {
-        return oldItem.id == newItem.id
+class FilmsDiffCallback: DiffUtil.ItemCallback<FilmListItem>() {
+    override fun areItemsTheSame(oldItem: FilmListItem, newItem: FilmListItem): Boolean {
+        return oldItem.id == newItem.id && oldItem.isFavorite == newItem.isFavorite
     }
 
-    override fun areContentsTheSame(oldItem: Film, newItem: Film): Boolean {
+    override fun areContentsTheSame(oldItem: FilmListItem, newItem: FilmListItem): Boolean {
         return oldItem == newItem
     }
 }

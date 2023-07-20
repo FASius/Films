@@ -15,21 +15,18 @@ class FilmsDataSource @Inject constructor(
 
     suspend fun getFilms(page: Int, limit: Int, filterBy: Filter, query: String?): FilmsListResponse {
         val filter = filterToString(filterBy)
-        return filmsApi.getFilms(query, filter, "-1", page + 1, limit)
+        val filterType = if (filterBy == Filter.ALPHABET) "1" else "-1"
+        return filmsApi.getFilms(query, filter, filterType, page + 1, limit)
     }
 
     suspend fun getFilmDetails(filmId: Long): FilmDetailsResponse {
         return filmsApi.getFilmDetails(filmId)
     }
 
-    private fun filterToString(filter: Filter): String {
-        return when(filter) {
-            Filter.RATING -> "rating.kp"
-            Filter.VOTES -> "votes.kp"
-            Filter.RELEASE_DATE -> "premiere.world"
-        }
+    private fun filterToString(filterBy: Filter) = when (filterBy) {
+        Filter.RATING -> "rating.kp"
+        Filter.RELEASE_DATE -> "premiere.world"
+        Filter.VOTES -> "votes.kp"
+        Filter.ALPHABET -> "name"
     }
-
-
-
 }

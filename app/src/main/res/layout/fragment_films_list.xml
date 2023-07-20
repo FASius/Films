@@ -5,7 +5,7 @@
 
     <include
         android:id="@+id/films_layout"
-        layout="@layout/fragment_favorites_films" />
+        layout="@layout/films_list" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/favorite_films"

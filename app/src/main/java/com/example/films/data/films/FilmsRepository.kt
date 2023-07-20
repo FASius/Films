@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface FilmsRepository {
 
-    suspend fun loadFilms()
+    suspend fun loadFilms(filterBy: Filter, query: String? = null, pageIndex: Int = 0)
 
     fun getFilms(filterBy: Filter, query: String? = null): Flow<PagingData<Film>>
 
@@ -15,7 +15,17 @@ interface FilmsRepository {
 
     suspend fun addToFavorites(film: Film)
 
-    suspend fun removeFromFavorites(film: Film)
+    suspend fun isFavorite(filmId: Long): Boolean
+
+    suspend fun addToFavorites(filmDetails: FilmDetails)
+
+    suspend fun addToFavorites(filmId: Long)
+
+    suspend fun favoritesFilmsCount(): Int
+
+    suspend fun removeFromFavorites(filmId: Long)
+
+    suspend fun removeAllFavorites()
 
     suspend fun getFilmDetails(filmId: Long): FilmDetails
 
